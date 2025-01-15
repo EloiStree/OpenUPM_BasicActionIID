@@ -1,13 +1,13 @@
 {
   "name": "be.elab.basicactioniid",
   "displayName": "Basic Action with IID",
-  "version": "0.0.1",
+  "version": "2025.1.16",
   "unity": "2018.1",
   "unityRelease": "",
   "description": "Some code that use IID to trigger basic action like: function, action, unityevent, sound ...",
   "keywords": ["Script", "Tool"],
   "dependencies": {
-    "be.elab.iid": "0.0.1"
+    "be.elab.iid": "2025.1.16"
   },
   "relatedPackages": {},
   "samples": [],
