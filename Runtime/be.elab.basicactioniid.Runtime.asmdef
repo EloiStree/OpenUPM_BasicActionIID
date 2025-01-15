@@ -1,5 +1,5 @@
 {
-    "name": "be.elab.iidbasicaction",
+    "name": "be.elab.basicactioniid",
     "rootNamespace": "",
     "references": [
         "be.elab.iid"

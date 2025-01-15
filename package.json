@@ -1,23 +1,26 @@
-
-{                                                                                
-  "name": "be.elab.iidbasicaction",                              
-  "displayName": "IID Basic Action",                        
-  "version": "0.0.1",                         
-  "unity": "2018.1",                             
-  "unityRelease": "",                             
-  "description": "Some code that use IID to trigger basic action like: function, action, unityevent, sound ...",                         
-  "keywords": ["Script","Tool"],                       
-  "dependencies":{},     
-  "relatedPackages":{},     
-  "samples" : [],     
-  "author" : {
-"name":"",
-"mail":"",
-"url":""},     
-  "repository":{
-"type":"Git",
-"url":"https://github.com/EloiStree/OpenUPM_IIDBasicAction.git",
-"footprint":"",
-"revision":""},     
-  "category": "Script"                   
-} 
+{
+  "name": "be.elab.basicactioniid",
+  "displayName": "Basic Action with IID",
+  "version": "0.0.1",
+  "unity": "2018.1",
+  "unityRelease": "",
+  "description": "Some code that use IID to trigger basic action like: function, action, unityevent, sound ...",
+  "keywords": ["Script", "Tool"],
+  "dependencies": {
+    "be.elab.iid": "0.0.1"
+  },
+  "relatedPackages": {},
+  "samples": [],
+  "author": {
+    "name": "Eloi Stree",
+    "mail": "",
+    "url": ""
+  },
+  "repository": {
+    "type": "Git",
+    "url": "https://github.com/EloiStree/OpenUPM_IIDBasicAction.git",
+    "footprint": "",
+    "revision": ""
+  },
+  "category": "Script"
+}

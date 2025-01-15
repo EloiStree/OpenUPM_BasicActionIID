@@ -1,7 +1,7 @@
 
 {                                                                   
-            "name": "be.elab.iidbasicactionEditor",          
-    "references": ["be.elab.iidbasicaction"
+            "name": "be.elab.basicactioniidEditor",          
+    "references": ["be.elab.basicactioniid"
 ],                                                              
     "optionalUnityReferences": [],                                  
     "includePlatforms": [                                           
