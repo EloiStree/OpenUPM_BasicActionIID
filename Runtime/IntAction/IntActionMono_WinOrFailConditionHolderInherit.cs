@@ -2,8 +2,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eloi.IntAction { 
-public class IntActionMono_WinOrDieConditionHolder : MonoBehaviour, I_IntegerEmitter
+namespace Eloi.IntAction
+{
+
+
+public class IntActionMono_WinOrFailConditionHolderInherit : MonoBehaviour, I_IntegerEmitter
 {
 
     public UnityEvent<int> m_onIntegerAction;

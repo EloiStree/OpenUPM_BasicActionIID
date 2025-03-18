@@ -4,8 +4,8 @@ namespace Eloi.IntAction
 {
     public interface I_IntegerEmitter { 
     
-        void AddEmissionListener(UnityAction<int> p_listener);
-        void RemoveEmissionListener(UnityAction<int> p_listener);
+        void AddEmissionListener(UnityAction<int> listener);
+        void RemoveEmissionListener(UnityAction<int> listener);
     }
 
 }
