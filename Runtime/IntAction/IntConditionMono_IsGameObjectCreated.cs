@@ -1,0 +1,3 @@
+﻿public class IntConditionMono_IsGameObjectCreated : IntConditionMono_IsObjectActiveInHierarchy
+{
+}
