@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4129866514583803004}
   - component: {fileID: 1597804746248055591}
   - component: {fileID: 7869126399779717342}
+  - component: {fileID: 7386234126947533160}
   m_Layer: 0
   m_Name: Sphere Bug
   m_TagString: Untagged
@@ -108,3 +109,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7386234126947533160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704398064132496769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59e323de935a014c971be7e4a0e558c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onTouched:
+    m_PersistentCalls:
+      m_Calls: []
+  m_toDisableOnTouched: []
+  m_destroyOnTouched: 1
