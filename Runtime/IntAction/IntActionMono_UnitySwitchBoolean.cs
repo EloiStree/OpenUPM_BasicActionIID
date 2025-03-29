@@ -14,34 +14,52 @@ namespace Eloi.IntAction
         public UnityEvent m_onSwitchToTrue;
         public UnityEvent m_onSwitchToFalse;
 
+        [ContextMenu("Turn On")]
+        public void TurnOn()
+        {
+            m_currentValue = true;
+            m_onSwitchValue.Invoke(m_currentValue);
+            m_onSwitchToTrue.Invoke();
+
+        }
+        [ContextMenu("Turn Off")]
+        public void TurnOff()
+        {
+            m_currentValue = false;
+            m_onSwitchValue.Invoke(m_currentValue);
+            m_onSwitchToFalse.Invoke();
+        }
+
+        [ContextMenu("Switch On Off")]
+        public void SwitchOnOff()
+        {
+
+            m_currentValue = !m_currentValue;
+            m_onSwitchValue.Invoke(m_currentValue);
+            if (m_currentValue)
+            {
+                m_onSwitchToTrue.Invoke();
+            }
+            else
+            {
+                m_onSwitchToFalse.Invoke();
+            }
+        }
 
         public void PushIn(int integerValue)
         {
             if (m_integerSwitch.m_intActionValue == integerValue)
             {
 
-                m_currentValue = !m_currentValue;
-                m_onSwitchValue.Invoke(m_currentValue);
-                if (m_currentValue)
-                {
-                    m_onSwitchToTrue.Invoke();
-                }
-                else
-                {
-                    m_onSwitchToFalse.Invoke();
-                }
+                SwitchOnOff();
             }
             if (m_integerOff.m_intActionValue == integerValue)
             {
-                m_currentValue = false;
-                m_onSwitchValue.Invoke(m_currentValue);
-                m_onSwitchToFalse.Invoke();
+                TurnOff();
             }
             if (m_integerOn.m_intActionValue == integerValue)
             {
-                m_currentValue = true;
-                m_onSwitchValue.Invoke(m_currentValue);
-                m_onSwitchToTrue.Invoke();
+                TurnOn();
             }
         }
     }

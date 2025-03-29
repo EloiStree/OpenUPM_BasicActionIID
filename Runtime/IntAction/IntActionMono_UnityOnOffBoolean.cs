@@ -11,20 +11,47 @@ namespace Eloi.IntAction
         public UnityEvent<bool> m_onUpdated;
         public UnityEvent m_onOn;
         public UnityEvent m_onOff;
+
+
+        [ContextMenu("Turn On")]
+        public void TurnOn()
+        {
+            m_currentValue = true;
+            m_onOn.Invoke();
+            m_onUpdated.Invoke(m_currentValue);
+        }
+        [ContextMenu("Turn Off")]
+        public void TurnOff()
+        {
+            m_currentValue = false;
+            m_onOff.Invoke();
+            m_onUpdated.Invoke(m_currentValue);
+        }
+
+        [ContextMenu("Switch On Off")]
+        public void SwitchOnOff() { 
+        
+            m_currentValue = !m_currentValue;
+            if (m_currentValue)
+            {
+                m_onOn.Invoke();
+            }
+            else
+            {
+                m_onOff.Invoke();
+            }
+        }
+
         public void PushIn(int integerValue)
         {
   
             if (m_on.m_intActionValue == integerValue)
             {
-                m_currentValue = true;
-                m_onOn.Invoke();
-                m_onUpdated.Invoke(m_currentValue);
+                TurnOn();
             }
             else if (m_off.m_intActionValue == integerValue)
             {
-                m_currentValue = false;
-                m_onOff.Invoke();
-                m_onUpdated.Invoke(m_currentValue);
+                TurnOff();
             }
         }
     }
