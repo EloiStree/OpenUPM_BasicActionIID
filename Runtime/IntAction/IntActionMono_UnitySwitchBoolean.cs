@@ -14,35 +14,56 @@ namespace Eloi.IntAction
         public UnityEvent m_onSwitchToTrue;
         public UnityEvent m_onSwitchToFalse;
 
-
+        public int m_lastReceivedValue;
         public void PushIn(int integerValue)
         {
-            if (m_integerSwitch.m_intActionValue == integerValue)
-            {
-
-                m_currentValue = !m_currentValue;
-                m_onSwitchValue.Invoke(m_currentValue);
-                if (m_currentValue)
-                {
-                    m_onSwitchToTrue.Invoke();
-                }
-                else
-                {
-                    m_onSwitchToFalse.Invoke();
-                }
-            }
+            m_lastReceivedValue= integerValue;
+           
             if (m_integerOff.m_intActionValue == integerValue)
             {
-                m_currentValue = false;
-                m_onSwitchValue.Invoke(m_currentValue);
-                m_onSwitchToFalse.Invoke();
+                TurnOff();
             }
-            if (m_integerOn.m_intActionValue == integerValue)
+            else if (m_integerOn.m_intActionValue == integerValue)
             {
-                m_currentValue = true;
-                m_onSwitchValue.Invoke(m_currentValue);
+                TurnOn();
+            }
+            else if (m_integerSwitch.m_intActionValue == integerValue)
+            {
+                SwitchValueOnOff();
+            }
+            Debug.Log("A :" + m_currentValue);
+        }
+
+        [ContextMenu("Switch on off")]
+        public void SwitchValueOnOff()
+        {
+            m_currentValue = !m_currentValue;
+            m_onSwitchValue.Invoke(m_currentValue);
+            if (m_currentValue)
+            {
                 m_onSwitchToTrue.Invoke();
             }
+            else
+            {
+                m_onSwitchToFalse.Invoke();
+            }
+            Debug.Log("Switch Value On Off:" + m_currentValue);
+        }
+
+        [ContextMenu("Turn on")]
+        public void TurnOn()
+        {
+            m_currentValue = true;
+            m_onSwitchValue.Invoke(m_currentValue);
+            m_onSwitchToTrue.Invoke();
+        }
+
+        [ContextMenu("Turn off")]
+        public void TurnOff()
+        {
+            m_currentValue = false;
+            m_onSwitchValue.Invoke(m_currentValue);
+            m_onSwitchToFalse.Invoke();
         }
     }
 

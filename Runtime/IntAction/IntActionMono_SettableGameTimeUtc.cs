@@ -5,19 +5,20 @@ using UnityEngine.Events;
 
 namespace Eloi.IntAction
 {
-    public class IntActionMono_SetGameTimeUtc : MonoBehaviour, I_IntActionBroadcastListener
+    public class IntActionMono_SettableGameTimeUtc : MonoBehaviour, I_IntActionBroadcastListener
     {
         [Header("Events")]
         public UnityEvent<float> m_onRelativeGameTimeSecondsUpdated;
-        public UnityEvent<double> m_onRelativeGameTimePercentUpdated;
-        public UnityEvent<float> m_onTotalGameTimeChanged;
+        public UnityEvent<long> m_onRelativeGameTimeMillisecondsUpdate;
+        public UnityEvent<float> m_onRelativeGameTimePercentUpdated;
+        public UnityEvent<float> m_onGamoOverTimeChanged;
 
         [Header("Game Time")]
-        public float m_gameTimeInSeconds = 300;
+        public float m_gameOverTimeInSeconds = 300;
 
         [Header("Debug")]
         public System.DateTime m_gameTimeStart = System.DateTime.Now;
-        public float m_relativGameTimeInSeconds = 0;
+        public float m_relativeGameTimeInSeconds = 0;
         public double m_percentGameTime = 0;
 
 
@@ -60,14 +61,16 @@ namespace Eloi.IntAction
         }
         public void Update()
         {
-            m_relativGameTimeInSeconds = (float)(System.DateTime.UtcNow - m_gameTimeStart).TotalSeconds;
-            if (m_gameTimeInSeconds == 0)
+            m_relativeGameTimeInSeconds = (float)(System.DateTime.UtcNow - m_gameTimeStart).TotalSeconds;
+            if (m_gameOverTimeInSeconds == 0)
                 m_percentGameTime = 1;
             else 
-                m_percentGameTime = m_relativGameTimeInSeconds / m_gameTimeInSeconds;
-            m_onRelativeGameTimeSecondsUpdated.Invoke(m_relativGameTimeInSeconds);
-            m_onRelativeGameTimePercentUpdated.Invoke(m_percentGameTime);
+                m_percentGameTime = m_relativeGameTimeInSeconds / m_gameOverTimeInSeconds;
+            m_onRelativeGameTimeSecondsUpdated.Invoke(m_relativeGameTimeInSeconds);
+            m_onRelativeGameTimeMillisecondsUpdate.Invoke((long)(m_relativeGameTimeInSeconds * 1000));
+            m_onRelativeGameTimePercentUpdated.Invoke((float)m_percentGameTime);
         }
+
         public void PushIn(int integerValue) {
 
             if (m_resetTimeToNow.m_intActionValue == integerValue)
@@ -79,8 +82,8 @@ namespace Eloi.IntAction
             {
                 if (m_setGameTime[i].m_integer.m_intActionValue == integerValue)
                 {
-                    m_gameTimeInSeconds = m_setGameTime[i].m_floatValueToSet;
-                    m_onTotalGameTimeChanged.Invoke(m_gameTimeInSeconds);
+                    m_gameOverTimeInSeconds = m_setGameTime[i].m_floatValueToSet;
+                    m_onGamoOverTimeChanged.Invoke(m_gameOverTimeInSeconds);
                     return;
                 }
             }
@@ -88,8 +91,8 @@ namespace Eloi.IntAction
             {
                 if (m_appendGameTime[i].m_integer.m_intActionValue == integerValue)
                 {
-                    m_gameTimeInSeconds += m_appendGameTime[i].m_floatValuetoAppend;
-                    m_onTotalGameTimeChanged.Invoke(m_gameTimeInSeconds);
+                    m_gameOverTimeInSeconds += m_appendGameTime[i].m_floatValuetoAppend;
+                    m_onGamoOverTimeChanged.Invoke(m_gameOverTimeInSeconds);
                     return;
                 }
             }
