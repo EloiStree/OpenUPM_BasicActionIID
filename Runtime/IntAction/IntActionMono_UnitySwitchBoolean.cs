@@ -14,11 +14,53 @@ namespace Eloi.IntAction
         public UnityEvent m_onSwitchToTrue;
         public UnityEvent m_onSwitchToFalse;
 
+<<<<<<< HEAD
         public int m_lastReceivedValue;
         public void PushIn(int integerValue)
         {
             m_lastReceivedValue= integerValue;
            
+=======
+        [ContextMenu("Turn On")]
+        public void TurnOn()
+        {
+            m_currentValue = true;
+            m_onSwitchValue.Invoke(m_currentValue);
+            m_onSwitchToTrue.Invoke();
+
+        }
+        [ContextMenu("Turn Off")]
+        public void TurnOff()
+        {
+            m_currentValue = false;
+            m_onSwitchValue.Invoke(m_currentValue);
+            m_onSwitchToFalse.Invoke();
+        }
+
+        [ContextMenu("Switch On Off")]
+        public void SwitchOnOff()
+        {
+
+            m_currentValue = !m_currentValue;
+            m_onSwitchValue.Invoke(m_currentValue);
+            if (m_currentValue)
+            {
+                m_onSwitchToTrue.Invoke();
+            }
+            else
+            {
+                m_onSwitchToFalse.Invoke();
+            }
+        }
+
+        public void PushIn(int integerValue)
+        {
+            if (m_integerSwitch.m_intActionValue == integerValue)
+            {
+
+                SwitchOnOff();
+            }
+>>>>>>> 054785d799784ed5465e58a66f233f829cf20181
             if (m_integerOff.m_intActionValue == integerValue)
             {
                 TurnOff();
@@ -41,7 +83,11 @@ namespace Eloi.IntAction
             m_onSwitchValue.Invoke(m_currentValue);
             if (m_currentValue)
             {
+<<<<<<< HEAD
                 m_onSwitchToTrue.Invoke();
+=======
+                TurnOn();
+>>>>>>> 054785d799784ed5465e58a66f233f829cf20181
             }
             else
             {
