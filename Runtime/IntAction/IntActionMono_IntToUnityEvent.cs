@@ -8,7 +8,7 @@ namespace Eloi.IntAction
         public IntToEventSet[] m_data = new IntToEventSet[] {
             new IntToEventSet(){m_integer = 700, m_onInvoke = new UnityEvent()},
           };
-        public void PushIn(int integerValue)
+        public void HandleBroadcastedInteger(int integerValue)
         {
             for (int i = 0; i < m_data.Length; i++)
             {

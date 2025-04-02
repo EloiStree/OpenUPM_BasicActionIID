@@ -12,6 +12,7 @@ namespace Eloi.IntAction
         public UnityEvent<long> m_onRelativeGameTimeMillisecondsUpdate;
         public UnityEvent<float> m_onRelativeGameTimePercentUpdated;
         public UnityEvent<float> m_onGamoOverTimeChanged;
+        public UnityEvent<float> m_onCountdownUpdateInSeconds;
 
         [Header("Game Time")]
         public float m_gameOverTimeInSeconds = 300;
@@ -19,6 +20,7 @@ namespace Eloi.IntAction
         [Header("Debug")]
         public System.DateTime m_gameTimeStart = System.DateTime.Now;
         public float m_relativeGameTimeInSeconds = 0;
+        public float m_countdownInSeconds = 0;
         public double m_percentGameTime = 0;
 
 
@@ -69,9 +71,11 @@ namespace Eloi.IntAction
             m_onRelativeGameTimeSecondsUpdated.Invoke(m_relativeGameTimeInSeconds);
             m_onRelativeGameTimeMillisecondsUpdate.Invoke((long)(m_relativeGameTimeInSeconds * 1000));
             m_onRelativeGameTimePercentUpdated.Invoke((float)m_percentGameTime);
+            m_countdownInSeconds = Mathf.Clamp( m_gameOverTimeInSeconds - m_relativeGameTimeInSeconds, 0, m_gameOverTimeInSeconds);
+            m_onCountdownUpdateInSeconds.Invoke(m_countdownInSeconds);
         }
 
-        public void PushIn(int integerValue) {
+        public void HandleBroadcastedInteger(int integerValue) {
 
             if (m_resetTimeToNow.m_intActionValue == integerValue)
             {

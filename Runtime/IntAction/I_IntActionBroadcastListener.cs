@@ -2,7 +2,6 @@
 {
     public interface I_IntActionBroadcastListener
     {
-        void PushIn(int integerValue);
+         void HandleBroadcastedInteger(int integerValue);
     }
-
 }

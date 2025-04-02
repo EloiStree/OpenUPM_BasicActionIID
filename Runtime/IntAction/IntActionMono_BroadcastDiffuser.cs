@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Eloi.IntAction
 {
-    public class IntActionMono_BroadcastDiffuser : MonoBehaviour, I_IntActionBroadcastListener
+    public class IntActionMono_BroadcastDiffuser : MonoBehaviour, I_IntActionListener
     {
         public int m_lastReceived;
 
@@ -19,14 +19,14 @@ namespace Eloi.IntAction
         {
             RefreshChildrenList();
         }
-
+        public bool m_lookForInactive=true;
         [ContextMenu("Refresh List")]
         private void RefreshChildrenList()
         {
-            m_childrenListening = m_source.GetComponentsInChildren<MonoBehaviour>().Where(t=>t is I_IntActionBroadcastListener && t!=this).ToArray();
+            m_childrenListening = m_source.GetComponentsInChildren<MonoBehaviour>(m_lookForInactive).Where(t=>t is I_IntActionListener && t!=this).ToArray();
         }
 
-        public void PushIn(int integerValue)
+        public void HandleIntegerAction(int integerValue)
         {
             m_lastReceived = integerValue;
             for (int i = 0; i < m_childrenListening.Length; i++)
@@ -34,8 +34,8 @@ namespace Eloi.IntAction
                 if (m_childrenListening[i] == this)
                     continue;
                 if (m_childrenListening[i] !=null && 
-                    m_childrenListening[i] is I_IntActionBroadcastListener)
-                    (m_childrenListening[i] as I_IntActionBroadcastListener).PushIn(integerValue);
+                    m_childrenListening[i] is I_IntActionListener)
+                    (m_childrenListening[i] as I_IntActionListener).HandleIntegerAction(integerValue);
             }
         }
 

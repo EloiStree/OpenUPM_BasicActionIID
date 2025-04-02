@@ -13,7 +13,7 @@ namespace Eloi.IntAction
         };
 
 
-        public void PushIn(int integerValue)
+        public void HandleBroadcastedInteger(int integerValue)
         {
             for (int i = 0; i < m_sceneIndexSet.Length; i++)
             {

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Eloi.IntAction
 {
-    public class IntActionMono_UnityOnOffBoolean : MonoBehaviour, I_IntActionBroadcastListener
+    public class IntActionMono_UnityOnOffBoolean : AbstractIntegerListenAndEmitterMono
     {
         public IntActionId m_on = new IntActionId(1);
         public IntActionId m_off = new IntActionId(0);
@@ -12,6 +12,17 @@ namespace Eloi.IntAction
         public UnityEvent m_onOn;
         public UnityEvent m_onOff;
 
+        public void SetOnOff(bool isOn)
+        {
+            if (isOn)
+            {
+                TurnOn();
+            }
+            else
+            {
+                TurnOff();
+            }
+        }
 
         [ContextMenu("Turn On")]
         public void TurnOn()
@@ -42,9 +53,10 @@ namespace Eloi.IntAction
             }
         }
 
-        public void PushIn(int integerValue)
+
+
+        protected override void ChildrenHandlerForIntegerAction(int integerValue)
         {
-  
             if (m_on.m_intActionValue == integerValue)
             {
                 TurnOn();

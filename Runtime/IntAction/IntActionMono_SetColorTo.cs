@@ -19,7 +19,7 @@ namespace Eloi.IntAction
             new IntToColorSet(708, Color.white),
         };
 
-        public void PushIn(int integerValue)
+        public void HandleBroadcastedInteger(int integerValue)
         {
             for (int i = 0; i < m_setColor.Length; i++)
             {

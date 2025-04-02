@@ -10,6 +10,7 @@ namespace Eloi.IntAction
         public UnityEvent<int> onIntToRelay;
 
         public GameObject m_source;
+        public bool m_lookForInactive = true;
         public MonoBehaviour[] m_emitterInChildrens;
 
         private void Reset()
@@ -23,9 +24,8 @@ namespace Eloi.IntAction
         {
             if (m_source == null)
                 return;
-            m_emitterInChildrens = m_source.GetComponentsInChildren<MonoBehaviour>().Where((p) => p is I_IntegerEmitter && p != this).ToArray();
+            m_emitterInChildrens = m_source.GetComponentsInChildren<MonoBehaviour>(m_lookForInactive).Where((p) => p is I_IntegerEmitter && p != this).ToArray();
            
-
         }
 
         public void OnEnable()
