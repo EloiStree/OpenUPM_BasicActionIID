@@ -7,6 +7,8 @@ namespace Eloi.IntAction
     {
         public UnityEvent<int> m_onIntegerActionEmitted;
         public int m_lastPushed;
+
+       
         public void AddEmissionListener(UnityAction<int> listener)
         {
             m_onIntegerActionEmitted.AddListener(listener);
@@ -26,4 +28,5 @@ namespace Eloi.IntAction
             m_lastPushed = integer.GetIntegerValue();
         }
     }
+
 }
