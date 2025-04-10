@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Eloi.IntAction
@@ -15,14 +16,14 @@ namespace Eloi.IntAction
         public IntActionId m_failConditionReach;
         public bool m_isFailConditionReached = false;
 
-        public void AddEmissionListener(UnityAction<int> p_listener)
+        public void AddEmissionListener(Action<int> p_listener)
         {
-            m_onIntegerAction.AddListener(p_listener);
+            m_onIntegerAction.AddListener(p_listener.Invoke);
         }
 
-        public void RemoveEmissionListener(UnityAction<int> p_listener)
+        public void RemoveEmissionListener(Action<int> p_listener)
         {
-            m_onIntegerAction.RemoveListener(p_listener);
+            m_onIntegerAction.RemoveListener(p_listener.Invoke);
         }
 
         [ContextMenu("Set as fail")]

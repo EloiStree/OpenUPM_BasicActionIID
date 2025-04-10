@@ -1,4 +1,5 @@
-﻿using Eloi.IntAction;
+﻿using System;
+using Eloi.IntAction;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,14 +21,14 @@ public class IntActionMono_WinOrFailConditionHolderInherit : MonoBehaviour, I_In
     public IntBoolReachConditioMono m_failCondition;
     public bool m_isFailConditionReached = false;
 
-        public void AddEmissionListener(UnityAction<int> p_listener)
+        public void AddEmissionListener(Action<int> p_listener)
         {
-            m_onIntegerAction.AddListener(p_listener);
+            m_onIntegerAction.AddListener(p_listener.Invoke);
         }
 
-        public void RemoveEmissionListener(UnityAction<int> p_listener)
+        public void RemoveEmissionListener(Action<int> p_listener)
         {
-            m_onIntegerAction.RemoveListener(p_listener);
+            m_onIntegerAction.RemoveListener(p_listener.Invoke);
         }
 
         public void Update()

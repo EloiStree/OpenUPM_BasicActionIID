@@ -13,5 +13,4 @@ namespace Eloi.IntAction
             m_colorValueToSet = valueToSet;
         }
     }
-
 }

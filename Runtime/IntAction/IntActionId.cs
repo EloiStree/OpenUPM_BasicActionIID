@@ -17,6 +17,10 @@ namespace Eloi.IntAction
         {
             this.m_intActionValue = intActionValue;
         }
+        public IntActionId()
+        {
+            this.m_intActionValue = 0;
+        }
 
         //overloadd == operator
         public static bool operator ==(IntActionId a, IntActionId b)

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,13 +51,13 @@ namespace Eloi.IntAction
         {
             onIntToRelay.Invoke(integerToEmmit);
         }
-        public void AddEmissionListener(UnityAction<int> listener)
+        public void AddEmissionListener(Action<int> listener)
         {
-            onIntToRelay.AddListener(listener);
+            onIntToRelay.AddListener(listener.Invoke);
         }
-        public void RemoveEmissionListener(UnityAction<int> listener)
+        public void RemoveEmissionListener(Action<int> listener)
         {
-            onIntToRelay.RemoveListener(listener);
+            onIntToRelay.RemoveListener(listener.Invoke );
         }
     }
 

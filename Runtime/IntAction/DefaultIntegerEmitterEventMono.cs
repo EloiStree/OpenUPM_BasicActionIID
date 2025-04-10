@@ -1,21 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Eloi.IntAction
 {
+
+
     public class DefaultIntegerEmitterEventMono: MonoBehaviour, I_IntegerEmitter
     {
         public UnityEvent<int> m_onIntegerActionEmitted;
         public int m_lastPushed;
 
        
-        public void AddEmissionListener(UnityAction<int> listener)
+        public void AddEmissionListener(Action<int> listener)
         {
-            m_onIntegerActionEmitted.AddListener(listener);
+            m_onIntegerActionEmitted.AddListener(listener.Invoke);
         }
-        public void RemoveEmissionListener(UnityAction<int> listener)
+        public void RemoveEmissionListener(Action<int> listener)
         {
-            m_onIntegerActionEmitted.RemoveListener(listener);
+            m_onIntegerActionEmitted.RemoveListener(listener.Invoke);
         }
         public void SendInteger(int integer)
         {
