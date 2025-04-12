@@ -23,9 +23,18 @@ namespace Eloi.IntAction
             m_linkData = default;
         }
 
+        public void GetIngeter(out IntActionId integer)
+        {
+            integer = m_integer;
+        }
+        public void GetIngeter(out int integer)
+        {
+            integer = m_integer.Value;
+        }
+
         public void SetIngeter(int integer)
         {
-            m_integer.m_intActionValue = integer;
+            m_integer.Value = integer;
         }
         public void SetIngeter(IntActionId integer)
         {
@@ -47,12 +56,12 @@ namespace Eloi.IntAction
 
         public int GetInteger()
         {
-            return m_integer.m_intActionValue;
+            return m_integer.Value;
         }
 
         public void GetInteger(out int integer)
         {
-            integer = m_integer.m_intActionValue;
+            integer = m_integer.Value;
         }
     }
 

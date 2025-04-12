@@ -1,9 +1,11 @@
-﻿using UnityEngine.Events;
+﻿using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace Eloi.IntAction
 {
     [System.Serializable]
-    public class IntAction_IntegerToGenericDataEvent<T> : I_IntActionListener    {
+    public class IntAction_IntegerToGenericDataEvent<T> : I_IntActionListener  , I_ContainsCollectionOfIntegerActionId
+    {
         public UnityEvent<T> m_onValueTriggered;
         public T m_lastTriggeredValue;
         public IntToDataLink<T>[] m_integerToValue = new IntToDataLink<T>[] {};
@@ -13,6 +15,7 @@ namespace Eloi.IntAction
             m_integerToValue = parameters;
         }
 
+        
         public void HandleIntegerAction(int integerValue)
         {
             if(m_integerToValue == null || m_integerToValue.Length == 0)
@@ -26,6 +29,76 @@ namespace Eloi.IntAction
                     m_onValueTriggered?.Invoke(m_integerToValue[i].GetLinkedData());
                     m_lastTriggeredValue = m_integerToValue[i].GetLinkedData();
                 }
+            }
+        }
+        public void GetIntActionIdCollection(out IEnumerable<IntActionId> integerActionIdList)
+        {
+            List<IntActionId> integerActionIdListTemp = new List<IntActionId>();
+            foreach (IntToDataLink<T> integerToValue in m_integerToValue)
+            {
+                if (integerToValue == null)
+                { continue; }
+                integerToValue.GetIngeter(out IntActionId integerActionId);
+                integerActionIdListTemp.Add(integerActionId);
+            }
+            integerActionIdList = integerActionIdListTemp;
+        }
+        public void SetIntActionIdCollection(IEnumerable<IntActionId> integerActionIdList)
+        {
+            if (integerActionIdList == null)
+            {
+                return;
+            }
+
+            int arraySize = m_integerToValue.Length;
+            int count = 0;
+            foreach (IntActionId id  in integerActionIdList)
+            {
+                if (id == null)
+                { continue; }
+
+                if (count >= arraySize)
+                {
+                    break;
+                }
+                if (id!=null && m_integerToValue[count] != null)
+                {
+                    m_integerToValue[count].SetIngeter(id);
+                }
+
+                count++;
+            }
+        }
+
+        public void SetIntActionIdCollectionWithParams(params IntActionId[] integerActionIdList)
+        {
+            SetIntActionIdCollection(integerActionIdList);
+        }
+
+        public void SetIntActionIdWithIntegerArray(int[] integerActionIdList) {
+
+            SetIntActionIdCollectionWithParams(integerActionIdList);
+        }
+        public void SetIntActionIdCollectionWithParams(params int[] integerActionIdList)
+        {
+
+            if (integerActionIdList == null)
+            {
+                return;
+            }
+            int arraySize = m_integerToValue.Length;
+            int count = 0;
+            foreach (int id in integerActionIdList)
+            {
+                if (count >= arraySize)
+                {
+                    break;
+                }
+                if (m_integerToValue[count] != null)
+                {
+                    m_integerToValue[count].SetIngeter(id);
+                }
+                count++;
             }
         }
     }
