@@ -15,6 +15,12 @@ namespace Eloi.IntAction
         public bool m_pushIntegerAtAwake = true;
 
 
+        private void Reset()
+        {
+            m_targetsToAutoFill = new GameObject[] { gameObject };
+        }
+
+
         [ContextMenu("Push integer action")]
         public void PushIntegerAction()
         {

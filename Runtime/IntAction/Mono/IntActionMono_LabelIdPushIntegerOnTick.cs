@@ -3,19 +3,17 @@ using UnityEngine.Events;
 
 namespace Eloi.IntAction
 {
-    public class IntActionMono_LabelIdPushIntegerOnTick : DefaultIntegerEmitterEventMono
+    public class IntActionMono_LabelIdPushIntegerOnTick : DefaultIntegerEmitterEventMono, I_ContainsOneIntegerActionId
     {
         public string m_label = "Label";
-        public int m_integerToPushOnTick;
+        public IntActionId m_integerToPushOnTick;
         public UnityEvent<string> m_onLabelChanged;
         [TextArea(0, 2)]
         public string m_labelFormat = "{0}({1})";
 
         private void OnValidate()
         {
-
             m_onLabelChanged?.Invoke(GetLabelIdAsString());
-
         }
         public string GetLabelIdAsString()
         {
@@ -23,7 +21,7 @@ namespace Eloi.IntAction
             {
                 return m_integerToPushOnTick.ToString();
             }
-            return string.Format(m_labelFormat, m_label, m_integerToPushOnTick);
+            return string.Format(m_labelFormat, m_label, m_integerToPushOnTick.Value);
         }
 
         private void Awake()
@@ -45,6 +43,21 @@ namespace Eloi.IntAction
         public void TickInvoke()
         {
             m_onIntegerActionEmitted.Invoke((int)m_integerToPushOnTick);
+        }
+
+        public void GetIntActionId(out IntActionId integerActionId)
+        {
+            integerActionId = m_integerToPushOnTick;
+        }
+
+        public void SetIntActionId(IntActionId integerActionId)
+        {
+            m_integerToPushOnTick = integerActionId;
+        }
+
+        public void SetIntActionId(int integerActionId)
+        {
+            m_integerToPushOnTick = new IntActionId(integerActionId);
         }
     }
 

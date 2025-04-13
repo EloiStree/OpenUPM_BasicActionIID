@@ -3,6 +3,43 @@ using UnityEngine.Events;
 
 namespace Eloi.IntAction
 {
+
+    [System.Serializable]
+    public class IntAction_IntegerToOneGenericDataEvent<T> : I_IntActionListener, I_ContainsOneIntegerActionId
+    {
+        public UnityEvent<T> m_onValueTriggered=new();
+        public IntActionId m_integerToTrigger=new IntActionId();
+        public T m_lastTriggeredValue =default;
+
+        public void GetIntActionId(out IntActionId integerActionId)
+        {
+            integerActionId = m_integerToTrigger;
+        }
+
+        public void HandleIntegerAction(int integerValue)
+        {
+            if (m_integerToTrigger == null)
+            {
+                return;
+            }
+            if (m_integerToTrigger.Value == integerValue)
+            {
+                m_onValueTriggered?.Invoke(m_lastTriggeredValue);
+            }
+        }
+
+        public void SetIntActionId(IntActionId integerActionId)
+        {
+            m_integerToTrigger = integerActionId;
+        }
+
+        public void SetIntActionId(int integerActionId)
+        {
+           
+                m_integerToTrigger.Value = integerActionId;
+            
+        }
+    }
     [System.Serializable]
     public class IntAction_IntegerToGenericDataEvent<T> : I_IntActionListener  , I_ContainsCollectionOfIntegerActionId
     {

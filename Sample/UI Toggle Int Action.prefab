@@ -86,8 +86,9 @@ GameObject:
   - component: {fileID: 6955950609130283875}
   - component: {fileID: 6975487110904021623}
   - component: {fileID: 1265052877175049674}
+  - component: {fileID: 8133332436595524047}
   m_Layer: 5
-  m_Name: Toggle Light
+  m_Name: UI Toggle Int Action
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,36 +188,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d504617b6d062234bbea903bd2e0959d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_onIntegerActionEmitted:
+  m_toggle:
+    m_onIntegerId:
+      m_intActionValue: 108
+    m_offIntegerId:
+      m_intActionValue: 208
+    m_currentValue: 0
+    m_onValueUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onValueChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onOnChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onOffChanged:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8133332436595524047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330787862640615328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfbadc6c3ee547345bcd3bc4c2de4890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_targetsToAutoFill:
+  - {fileID: 4330787862640615328}
+  m_onIntegerActionTrueLoaded:
     m_PersistentCalls:
       m_Calls: []
-  m_lastPushed: 0
-  m_on:
-    m_intActionValue: 102
-  m_off:
-    m_intActionValue: 202
-  m_currentValue: 1
-  m_onUpdated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6975487110904021623}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-        m_MethodName: SetIsOnWithoutNotify
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_onOn:
+  m_onIntegerActionFalseLoaded:
     m_PersistentCalls:
       m_Calls: []
-  m_onOff:
-    m_PersistentCalls:
-      m_Calls: []
+  m_actionAsIntegerTrue:
+    m_loadedDescription: Light On
+    m_loadedInteger:
+      m_intActionValue: 108
+    m_integerAsFile: {fileID: 4900000, guid: f626f3054eab90749b954738ffc615ed, type: 3}
+  m_actionAsIntegerFalse:
+    m_loadedDescription: Light Off
+    m_loadedInteger:
+      m_intActionValue: 208
+    m_integerAsFile: {fileID: 4900000, guid: d4431a380f3af7f49ac5b2c8ac32bc36, type: 3}
+  m_pushIntegerAtAwake: 1
 --- !u!1 &7879411987844240186
 GameObject:
   m_ObjectHideFlags: 0

@@ -239,7 +239,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.5
+  m_fontSize: 80
   m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 5418733834277432383}
   - component: {fileID: 5771171829202497176}
   - component: {fileID: 8329162871197725977}
+  - component: {fileID: 6769413090960366801}
   m_Layer: 5
   m_Name: Panel Button Invoke Integer
   m_TagString: Untagged
@@ -347,7 +348,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_lastPushed: 0
-  m_integerToPushOnTick: 101
+  m_integerToPushOnTick:
+    m_intActionValue: 5
 --- !u!114 &5771171829202497176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,3 +406,26 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &6769413090960366801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039823523377137189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79b2f6b2e2944a4b8bd6c6e32854a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_targetsToAutoFill:
+  - {fileID: 5039823523377137189}
+  m_onIntegerActionLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  m_actionAsInteger:
+    m_loadedDescription: Restart Game
+    m_loadedInteger:
+      m_intActionValue: 101
+    m_integerAsFile: {fileID: 4900000, guid: 2dd4b7e4d7da7c54abba50f4b1c13050, type: 3}
+  m_pushIntegerAtAwake: 1

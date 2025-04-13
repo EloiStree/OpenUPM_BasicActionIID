@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 namespace Eloi.IntAction
 {
+
+    
+
     public class IntLobbyActionMono_Toggle : MonoBehaviour, I_IntegerListenAndEmitter, I_ContainsTogglePairOfIntegerActionId
     {
         [SerializeField] IntLobbyAction_Toggle m_toggle= new IntLobbyAction_Toggle();
@@ -28,7 +31,7 @@ namespace Eloi.IntAction
 
         [ContextMenu("Turn Off and send integer")]
 
-        public void TurnOffAndPushInteger() => m_toggle?.TurnOnAndPushInteger();
+        public void TurnOffAndPushInteger() => m_toggle?.TurnOffAndPushInteger();
         [ContextMenu("Turn Off and send integer")]
 
         public void SwitchOnOffAndPushInteger() => m_toggle?.SwitchOnOffAndPushInteger();
