@@ -9,6 +9,7 @@ namespace Eloi.IntAction
 
     public class IntLobbyActionMono_Toggle : MonoBehaviour, I_IntegerListenAndEmitter, I_ContainsTogglePairOfIntegerActionId
     {
+        
         [SerializeField] IntLobbyAction_Toggle m_toggle= new IntLobbyAction_Toggle();
         public void SetOnOffAndPushInteger(bool isOn) => m_toggle?.SetOnOff(isOn, true);
         
@@ -32,7 +33,7 @@ namespace Eloi.IntAction
         [ContextMenu("Turn Off and send integer")]
 
         public void TurnOffAndPushInteger() => m_toggle?.TurnOffAndPushInteger();
-        [ContextMenu("Turn Off and send integer")]
+        [ContextMenu("Switch and send integer")]
 
         public void SwitchOnOffAndPushInteger() => m_toggle?.SwitchOnOffAndPushInteger();
 
@@ -45,27 +46,35 @@ namespace Eloi.IntAction
         [ContextMenu("Turn Off and dont send integer")]
         public void TurnOffWithoutPushInteger() => m_toggle?.TurnOffWithoutPushInteger();
 
-        [ContextMenu("Turn Off and dont send integer")]
+        [ContextMenu("Switch Value without pushing")]
         public void SwitchOnOffWithoutPushInteger() => m_toggle?.SwitchOnOffWithoutPushInteger();
 
-      
-        
-       
+
+
+
+        public bool GetCurrentValue()
+        {
+            return m_toggle.GetCurrentValue();
+        }
+        public void GetCurrentValue(out bool value)
+        {
+            m_toggle.GetCurrentValue(out value);
+        }
 
         public void HandleIntegerAction(int integerValue)
         {
-            if (IsObjectNotActive())return;
+            //if (IsObjectNotActive())return;
             m_toggle?.HandleIntegerAction(integerValue);
         }
 
-        private bool IsObjectNotActive()
-        {
-            return !this.gameObject.activeInHierarchy || !this.enabled;
-        }
-        private bool IsObjectActive()
-        {
-            return this.gameObject.activeInHierarchy && this.enabled;
-        }
+        //private bool IsObjectNotActive()
+        //{
+        //    return !this.gameObject.activeInHierarchy || !this.enabled;
+        //}
+        //private bool IsObjectActive()
+        //{
+        //    return this.gameObject.activeInHierarchy && this.enabled;
+        //}
 
         public void AddEmissionListener(Action<int> listener)
         {

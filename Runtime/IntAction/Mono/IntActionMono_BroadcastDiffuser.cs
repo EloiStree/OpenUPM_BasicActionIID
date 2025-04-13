@@ -29,6 +29,7 @@ namespace Eloi.IntAction
                     continue;
                 m_childrenListening.AddRange(source.GetComponentsInChildren<MonoBehaviour>(m_lookForInactive).Where(t => t is I_IntActionListener && t != this));
             }
+            m_childrenListening = m_childrenListening.Where(k=>k!=null).Distinct().ToList();
             m_childrenListening.Remove(this);
         }
 

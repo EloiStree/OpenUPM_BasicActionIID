@@ -11,17 +11,20 @@ namespace Eloi.IntAction
         /// When Changing of value state I emit the integer value to be handled by the lobby manager
         /// </summary>
         [System.Serializable]
-    public class IntLobbyAction_Toggle: I_IntegerListenAndEmitter, I_HasSendIntegerHandler
+    public class IntLobbyAction_Toggle: I_IntegerListenAndEmitter
     {
         [Header("Toggle")]
         public IntActionId m_onIntegerId = new IntActionId(1);
         public IntActionId m_offIntegerId = new IntActionId(0);
+        public bool m_pushOnlyIfNewState=true;
         public bool m_currentValue;
         [Header("Event")]
         public UnityEvent<bool> m_onValueUpdated;
         public UnityEvent<bool> m_onValueChanged;
         public UnityEvent m_onOnChanged;
         public UnityEvent m_onOffChanged;
+        public int m_lastPushed;
+        public int m_lastReceived;
 
         public IntLobbyAction_Toggle(int on, int off)
         {
@@ -82,12 +85,15 @@ namespace Eloi.IntAction
 
             bool oldValue = m_currentValue;
             m_currentValue = true;
+            bool changed = oldValue != m_currentValue;
             m_onOnChanged.Invoke();
             m_onValueUpdated.Invoke(m_currentValue);
             if (oldValue != m_currentValue)
             {
                 m_onValueChanged.Invoke(m_currentValue);
             }
+            if (m_pushOnlyIfNewState && !changed)
+                return;
             if (pushInteger)
             {
                 PushStateAsInteger();
@@ -99,6 +105,7 @@ namespace Eloi.IntAction
         {
             bool oldValue = m_currentValue;
             m_currentValue = false;
+            bool changed= oldValue != m_currentValue;
             m_onOffChanged.Invoke();
             m_onValueUpdated.Invoke(m_currentValue);
 
@@ -106,6 +113,9 @@ namespace Eloi.IntAction
             {
                 m_onValueChanged.Invoke(m_currentValue);
             }
+
+            if (m_pushOnlyIfNewState && !changed)
+                return;
             if (pushInteger)
             {
                 PushStateAsInteger();
@@ -144,16 +154,17 @@ namespace Eloi.IntAction
 
         private void PushStateAsInteger()
         {
-            SendInteger(m_currentValue ? m_onIntegerId.Value : m_offIntegerId.Value);
+
+            int toSend= (m_currentValue ? m_onIntegerId.Value : m_offIntegerId.Value);
+            m_onRequestToSendInteger?.Invoke(toSend);
+            m_lastPushed = toSend;
         }
-        public void SendInteger(int integerValue)
-        {
-            m_onRequestToSendInteger?.Invoke(integerValue);
-        }
+       
 
         public void HandleIntegerAction(int integerValue)
         {
-            
+
+            m_lastReceived = integerValue;
             if (m_onIntegerId.Value == integerValue)
             {
                 TurnOn(false);
@@ -177,6 +188,10 @@ namespace Eloi.IntAction
         public bool GetCurrentValue()
         {
             return m_currentValue;
+        }
+        public void GetCurrentValue(out bool value) 
+        {
+            value = m_currentValue;
         }
 
         public void SetIntegerIdWhenOn(int integerValue)

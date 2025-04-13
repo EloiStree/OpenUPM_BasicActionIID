@@ -10,6 +10,7 @@ namespace Eloi.IntAction
     {
 
         public UnityEvent<int> onIntToRelay;
+        public int m_lastRelayedInteger;
 
         public GameObject[] m_sources;
         public bool m_lookForInactive = true;
@@ -32,7 +33,10 @@ namespace Eloi.IntAction
                     continue;
                 m_emitterInChildrens.AddRange(source.GetComponentsInChildren<MonoBehaviour>(m_lookForInactive).Where(t => t is I_IntActionEmitter && t != this));
             }
-           
+
+            m_emitterInChildrens = m_emitterInChildrens.Where(k => k != null).Distinct().ToList();
+            m_emitterInChildrens.Remove(this);
+
         }
 
         public void OnEnable()
@@ -53,9 +57,10 @@ namespace Eloi.IntAction
                     (item as I_IntActionEmitter).RemoveEmissionListener(PushIn);
             }
         }
-        public void PushIn(int integerToEmmit)
+        public void PushIn(int integerToEmitted)
         {
-            onIntToRelay.Invoke(integerToEmmit);
+            m_lastRelayedInteger = integerToEmitted;
+            onIntToRelay.Invoke(integerToEmitted);
         }
         public void AddEmissionListener(Action<int> listener)
         {

@@ -13,8 +13,14 @@ namespace Eloi.IntAction
 
         private void OnValidate()
         {
+            RefreshUI();
+        }
+
+        private void RefreshUI()
+        {
             m_onLabelChanged?.Invoke(GetLabelIdAsString());
         }
+
         public string GetLabelIdAsString()
         {
             if (string.IsNullOrEmpty(m_label))
@@ -53,11 +59,13 @@ namespace Eloi.IntAction
         public void SetIntActionId(IntActionId integerActionId)
         {
             m_integerToPushOnTick = integerActionId;
+            RefreshUI();
         }
 
         public void SetIntActionId(int integerActionId)
         {
             m_integerToPushOnTick = new IntActionId(integerActionId);
+            RefreshUI();
         }
     }
 
