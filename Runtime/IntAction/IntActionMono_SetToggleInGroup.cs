@@ -131,7 +131,7 @@ namespace Eloi.IntAction
         public IntLobbyActionMono_Toggle[] m_toggleToSet;
 
 
-        [ContextMenu("Turn them all On")]
+        [ContextMenu("Turn them all On by sending integer")]
         public void TurnOnAndPushIntegerForAll()
         {
             foreach (var toggle in m_toggleToSet)
@@ -140,7 +140,7 @@ namespace Eloi.IntAction
             }
         }
 
-        [ContextMenu("Turn them all off")]
+        [ContextMenu("Turn them all off by sending integer")]
         public void TurnOffAndPushIntegerForAll()
         {
             foreach (var toggle in m_toggleToSet)
@@ -148,7 +148,24 @@ namespace Eloi.IntAction
                 toggle.TurnOffAndPushInteger();
             }
         }
-        [ContextMenu("Set as random all")]
+        [ContextMenu("Turn them all On without sending integer")]
+        public void TurnOnAndWithoutPushingIntegerForAll()
+        {
+            foreach (var toggle in m_toggleToSet)
+            {
+                toggle.TurnOnWithoutPushInteger();
+            }
+        }
+
+        [ContextMenu("Turn them all off without sending integer")]
+        public void TurnOffAndWithoutPushIntegerForAll()
+        {
+            foreach (var toggle in m_toggleToSet)
+            {
+                toggle.TurnOffWithoutPushInteger();
+            }
+        }
+        [ContextMenu("Set as random all by sending integer")]
         public void TurnRandomlyAllToggles()
         {
             foreach (var toggle in m_toggleToSet)
